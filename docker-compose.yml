@@ -1,0 +1,30 @@
+version: '3'
+services:
+    database:
+        image: 'mongo'
+        container_name: 'packit'
+        environment: 
+            - MONGO_INITDB_DATABASE='packitdatabase'
+        volumes: 
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+            - ./mongo-volume:/data/db
+        ports:
+            - '27017-27019:27017-27019'
+    swagger:
+        image: 'swaggerapi/swagger-editor'
+        container_name: 'packit_documentation'
+        ports:
+            - '3500-4000'
+    nginx-proxy:
+        image: 'jwilder/nginx-proxy:alpine'
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./certs:/etc/nginx/certs
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        restart: unless-stopped
+networks:
+    default:
+        external:
+            name: nginx-proxy
