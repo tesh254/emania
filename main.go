@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"log"
 
-	"github.com/tesh254/packit/controllers"
+	"github.com/tesh254/emania/controllers"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )

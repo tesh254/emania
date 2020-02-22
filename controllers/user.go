@@ -4,10 +4,10 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tesh254/packit/forms"
-	"github.com/tesh254/packit/models"
-	"github.com/tesh254/packit/services"
-	"github.com/tesh254/packit/helpers"
+	"github.com/tesh254/emania/forms"
+	"github.com/tesh254/emania/helpers"
+	"github.com/tesh254/emania/models"
+	"github.com/tesh254/emania/services"
 )
 
 var userModel = new(models.UserModel)
@@ -149,7 +149,7 @@ func (user *UserController) Verify(c *gin.Context) {
 	email, msg, _ := services.DecodeToken(token)
 
 	if msg == "Token is invalid" {
-		c.JSON(403, gin.H{"message": msg })
+		c.JSON(403, gin.H{"message": msg})
 		c.Abort()
 		return
 	}
@@ -167,7 +167,7 @@ func (user *UserController) Verify(c *gin.Context) {
 	}
 
 	findUser, _ := userModel.GetUserByEmail(email)
-	
+
 	if findUser.Email == "" {
 		c.JSON(404, gin.H{"message": "Account not found"})
 		c.Abort()
@@ -196,8 +196,7 @@ func (user *UserController) Verify(c *gin.Context) {
 		return
 	}
 
-
-	c.JSON(201, gin.H{"message": "Account has been verified" })
+	c.JSON(201, gin.H{"message": "Account has been verified"})
 }
 
 // PasswordRequest controller handles password reset request
@@ -205,7 +204,7 @@ func (user *UserController) PasswordRequest(c *gin.Context) {
 	var data forms.PasswordRequestCommand
 
 	if c.BindJSON(&data) != nil {
-		c.JSON(406, gin.H{"message": "Provide email" })
+		c.JSON(406, gin.H{"message": "Provide email"})
 		c.Abort()
 		return
 	}
@@ -213,7 +212,7 @@ func (user *UserController) PasswordRequest(c *gin.Context) {
 	// Handle email password reset sendout
 	verificationToken, err := services.GenerateToken(data.Email)
 
-	link := os.Getenv("BASE_URL") +  "/password-reset-submit?token="+ verificationToken
+	link := os.Getenv("BASE_URL") + "/password-reset-submit?token=" + verificationToken
 
 	subject := "Password Reset"
 	body := "You are receiving this email because you requested for a password reset. Click this link to verify <a href='" + link + "'>here</a>."
@@ -236,7 +235,7 @@ func (user *UserController) PasswordResetSubmit(c *gin.Context) {
 	email, msg, _ := services.DecodeToken(token)
 
 	if msg == "Token is invalid" {
-		c.JSON(403, gin.H{"message": msg })
+		c.JSON(403, gin.H{"message": msg})
 		c.Abort()
 		return
 	}
@@ -260,7 +259,7 @@ func (user *UserController) PasswordResetSubmit(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	
+
 	findUser, _ := userModel.GetUserByEmail(email)
 
 	if findUser.Email == "" {

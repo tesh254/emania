@@ -3,7 +3,7 @@ package models
 import (
 	"os"
 
-	"github.com/tesh254/packit/db"
+	"github.com/tesh254/emania/db"
 )
 
 var server = os.Getenv("DATABASE")
