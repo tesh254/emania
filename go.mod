@@ -3,6 +3,7 @@ module github.com/tesh254/packit
 go 1.13
 
 require (
+	github.com/766b/go-outliner v0.0.0-20180511142203-fc6edecdadd7 // indirect
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/DataDog/zstd v1.4.4 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

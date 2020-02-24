@@ -3,8 +3,8 @@ package models
 import (
 	"time"
 	
-	"github.com/tesh254/packit/forms"
-	"github.com/tesh254/packit/helpers"
+	"github.com/tesh254/emania/forms"
+	"github.com/tesh254/emania/helpers"
 	"gopkg.in/mgo.v2/bson"
 )
 

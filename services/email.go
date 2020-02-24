@@ -10,7 +10,7 @@ import (
 
 // SendMail handles sending based on parameters via sendgrid
 func SendMail(toMail string, name string, subject string, body string) (*rest.Response, error) {
-	from := mail.NewEmail("Packit", "ewachira254@gmail.com")
+	from := mail.NewEmail("Emania", "ewachira254@gmail.com")
 	to := mail.NewEmail(name, toMail)
 	message := mail.NewSingleEmail(from, subject, to, body, body)
 	client := sendgrid.NewSendClient(os.Getenv("SENDGRID_KEY"))
